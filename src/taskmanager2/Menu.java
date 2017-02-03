@@ -2,7 +2,6 @@ package taskmanager2;
 
 import java.util.*;
 import java.io.*;
-import java.util.*;
 
 public class Menu {
     private List<MenuEntry> entries = new ArrayList<MenuEntry>();
@@ -21,7 +20,6 @@ public class Menu {
                 Xml.saveXml();
             }
         });
-        
     }
 
     public void run() {

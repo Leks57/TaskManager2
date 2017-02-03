@@ -2,13 +2,8 @@ package taskmanager2;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TaskManager2 {
     
@@ -30,9 +25,7 @@ public class TaskManager2 {
             System.out.println("Файл не существует. Будет создан новый файл xml");
             file.createNewFile();
         }
-        
-        
-   
+
         Menu menu = new Menu();
         
         // Добавляем пункт меню PrintTasks
@@ -88,8 +81,5 @@ public class TaskManager2 {
         });        
         
         menu.run();
-        
-
     }
-    
 }

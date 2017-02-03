@@ -120,7 +120,6 @@ public abstract class Xml {
                     
                     NodeList listOfContacts = firstTask.getElementsByTagName("Контакт");
                     int totalContacts = listOfContacts.getLength();
-                    //System.out.println("        " + "Общее кол-во контактов: " + totalContacts);
                         for(int с=0; с<totalContacts; с++){
                             Node contactNode = listOfContacts.item(с);
                             Contact contact1 = new Contact();

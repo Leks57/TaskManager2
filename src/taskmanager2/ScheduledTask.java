@@ -18,8 +18,7 @@ public class ScheduledTask extends TimerTask {
         return alarm;
     }
     
-    
-    
+
     // Добавляем такс
     @Override
     public void run() {
