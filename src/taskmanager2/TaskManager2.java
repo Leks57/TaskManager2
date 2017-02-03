@@ -42,6 +42,7 @@ public class TaskManager2 {
             public void run() {
                 tasks.createTask();
                 Xml.saveXml();
+                TimerTask.updateTimerTask();
             }
         });
         
@@ -50,6 +51,7 @@ public class TaskManager2 {
             @Override
             public void run() {
             tasks.editTask();
+            TimerTask.updateTimerTask();
             }
         });
         
@@ -65,7 +67,13 @@ public class TaskManager2 {
         menu.getEntries().add(new MenuEntry("6 - Timer") {
             @Override
             public void run() {
-                for(Task z: TaskList.getTasks()){
+                
+                TimerTask.updateTimerTask();
+                
+                
+                
+                
+              /*  for(Task z: TaskList.getTasks()){
                     Date now = new Date();
                     if (now.compareTo(z.getDate()) <= 0) {
                         ScheduledTask newTask = new ScheduledTask();
@@ -75,10 +83,10 @@ public class TaskManager2 {
                         t.start();
                     }
                 }
-                
+                */
                 
             }
-        });        
+        });      
         
         menu.run();
     }
