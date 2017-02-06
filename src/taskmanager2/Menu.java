@@ -18,7 +18,9 @@ public class Menu {
             public void run() {
                 isExit = true;
                 Xml.saveXml();
-                TimerTask.tim.stop();
+                ScheduledTask.time.cancel();
+                TaskManager2.timerThread.interrupt();
+                
             }
         });
     }

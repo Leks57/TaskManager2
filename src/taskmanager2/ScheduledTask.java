@@ -13,13 +13,14 @@ public class ScheduledTask extends TimerTask {
     public void setAlarm(Date alarm) {
         this.alarm = alarm;
     }
-    
     public Date getAlarm() {
         return alarm;
     }
     
+    static Timer time = new Timer();
+   // static ScheduledTask currentTask = new ScheduledTask();
 
-    // Добавляем такс
+    // Добавляем таск
     @Override
     public void run() {
         Date now = new Date();
@@ -29,21 +30,23 @@ public class ScheduledTask extends TimerTask {
                 now = new Date();
                 Thread.sleep(1000);
                 if (now.compareTo(alarm) >= 0) {
-                    System.out.println("Напоминание сработало: " + now);
-                    System.out.println("Now " + now);
-                    System.out.println("Alarm " + alarm);
+                    System.out.println("НАПОМИНАНИЕ!");
+                    
+                    TaskList.getTasks().get(TaskManager2.getOperatedTask()).printTask();    // вывод задачи на экран
+                    
+                    taskmanager2.TimerTask.updateTimerTask();
+                    
                     break;
                 }
             }
         } catch(InterruptedException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            time.cancel();
         }
     }
  
     public static void start() {
-        Timer time = new Timer();
-        ScheduledTask currentTask = new ScheduledTask();
-        time.schedule(currentTask, currentTask.getAlarm()); // void schedule (TimerTask task, Date when)
+        time.schedule(TaskManager2.newTask, TaskManager2.newTask.getAlarm()); // void schedule (TimerTask task, Date when)
         }
 
 }

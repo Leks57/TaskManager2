@@ -8,16 +8,28 @@ import java.util.Date;
 public class TaskManager2 {
     
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     private static final String pathFile = "C:\\test.xml";
+    
+    private static int operatedTask;
+    public static void setOperatedTask(int operatedTask) {
+        TaskManager2.operatedTask = operatedTask;
+    }
+    public static int getOperatedTask() {
+        return operatedTask;
+    }
 
     public static String getPathFile() {
         return pathFile;
     }
+    
+    static ScheduledTask newTask = new ScheduledTask();
+    static Thread timerThread = new Thread(newTask);
         
+    
     public static void main(String[] args) throws IOException {
 
         TaskList tasks = new TaskList();
+        
         File file = new File("C:\\test.xml");
         if (file.exists()) {
             Xml.readXml();
@@ -25,7 +37,9 @@ public class TaskManager2 {
             System.out.println("Файл не существует. Будет создан новый файл xml");
             file.createNewFile();
         }
-
+        
+        TimerTask.updateTimerTask(); // Обновление даты первого срабатывания таймера и запуск таймера
+        
         Menu menu = new Menu();
         
         // Добавляем пункт меню PrintTasks
@@ -68,23 +82,8 @@ public class TaskManager2 {
             @Override
             public void run() {
                 
-                TimerTask.updateTimerTask();
-                
-                
-                
-                
-              /*  for(Task z: TaskList.getTasks()){
-                    Date now = new Date();
-                    if (now.compareTo(z.getDate()) <= 0) {
-                        ScheduledTask newTask = new ScheduledTask();
-                        System.out.println("Установлено напоминание на: " + z.getDate());
-                        newTask.setAlarm(z.getDate());
-                        Thread t = new Thread(newTask);
-                        t.start();
-                    }
-                }
-                */
-                
+                System.out.println("tim.getState() = " + timerThread.getState());
+
             }
         });      
         
