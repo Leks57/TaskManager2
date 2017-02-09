@@ -2,6 +2,7 @@ package taskmanager2;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.TimerTask;
 import java.util.Timer;
 import java.util.logging.Level;
@@ -33,12 +34,28 @@ public class ScheduledTask extends TimerTask {
                     System.out.println("НАПОМИНАНИЕ!");
                     
                     TaskList.getTasks().get(TaskManager2.getOperatedTask()).printTask();    // вывод задачи на экран
+                    TaskList.getTasks().get(TaskManager2.getOperatedTask()).setCompleted(true);
                     
-                    taskmanager2.TimerTask.updateTimerTask();
+                    System.out.println("");
+                    System.out.println("Отложить напоминание на 10 секунд? 1/0");
+                    Scanner choice = new Scanner(System.in);
+                    
+                    if (choice.nextInt() == 1) {
+                        Date prevDate = new Date();
+                        prevDate.setTime(prevDate.getTime() + 10000); // откладываем задачу на 10 с
+                        
+                        TaskManager2.newTask.setAlarm(prevDate);
+                        TaskManager2.newTask.run();
+                        
+                        TaskList.getTasks().get(TaskManager2.getOperatedTask()).setDate(prevDate);
+                        TaskList.getTasks().get(TaskManager2.getOperatedTask()).setCompleted(false);
+                    }
+                    
                     
                     break;
                 }
             }
+          //  taskmanager2.TimerTask.updateTimerTask();
         } catch(InterruptedException e) {
             //e.printStackTrace();
             time.cancel();

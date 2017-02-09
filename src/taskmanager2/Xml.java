@@ -42,12 +42,15 @@ public abstract class Xml {
             Element taskDate = doc.createElement("Дата");
             taskDate.appendChild(doc.createTextNode(TaskManager2.DATE_FORMAT.format(t.getDate())));
             
+            Element taskStatus = doc.createElement("Статус");
+            taskStatus.appendChild(doc.createTextNode(String.valueOf(t.isCompleted())));
+            
             Element taskNo = doc.createElement("Задача");
             
             taskNo.appendChild(taskName);
             taskNo.appendChild(taskDescription);
             taskNo.appendChild(taskDate);
-            taskNo.appendChild(taskDate);
+            taskNo.appendChild(taskStatus);
             
             for(Contact c: t.contacts){
                 
@@ -115,6 +118,10 @@ public abstract class Xml {
 
                     if ((firstTask.getElementsByTagName("Дата")).getLength() != 0) {
                         task1.setDate(TaskManager2.DATE_FORMAT.parse((firstTask.getElementsByTagName("Дата").item(0)).getTextContent()));
+                    }
+                    
+                    if ((firstTask.getElementsByTagName("Статус")).getLength() != 0) {
+                        task1.setCompleted(Boolean.valueOf((firstTask.getElementsByTagName("Статус").item(0)).getTextContent()));
                     }
                     
                     NodeList listOfContacts = firstTask.getElementsByTagName("Контакт");

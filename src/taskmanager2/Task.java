@@ -7,6 +7,9 @@ public class Task {
     private String name;
     private String description;
     private Date date; // calendar или date
+    
+    private boolean completed = false;
+    
     List<Contact> contacts = new ArrayList<Contact>();
 
     public void setName(String name) {
@@ -41,6 +44,13 @@ public class Task {
             this.setDate(TaskManager2.DATE_FORMAT.parse(taskDate.nextLine()));
         } catch (ParseException ex) {System.out.println("Введена неправильная дата! Повторите ввод!"); setTaskDate();
         }
+    }
+    
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+    public boolean isCompleted() {
+        return completed;
     }
     
     public String getName() {
