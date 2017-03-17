@@ -2,6 +2,9 @@
 package taskmanager2;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -164,6 +167,20 @@ public abstract class Xml {
         t.printStackTrace ();
         }
 }
+    
+    public static void defineXml() {
+        File file = new File(TaskManager2.getPathFile());
+        if (file.exists()) {
+            Xml.readXml();
+        } else {
+            try {
+                System.out.println("Файл не существует. Будет создан новый файл xml");
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Xml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
 
 }
